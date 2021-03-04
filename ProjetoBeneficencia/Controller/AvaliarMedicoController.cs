@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace ProjetoBeneficencia.Controller
 {
-    public class AvaliarController
+    public class AvaliarMedicoController
     {
         public static void MedicoAvaliar()
         {
-            var avaliar = new Avaliar();
+            var AvaliarMedico = new AvaliarMedico();
             Console.Write("Qual o nome do medico que voce deseja avaliar: ");
-            avaliar.Medico = Console.ReadLine();
+            AvaliarMedico.Nome = Console.ReadLine();
             Console.Write("Digite uma nota para o medico: ");
-            avaliar.Nota = int.Parse(Console.ReadLine());
+            AvaliarMedico.Nota = int.Parse(Console.ReadLine());
             Console.WriteLine("Deixe uma sugestão para o profissional");
-            avaliar.Sugestao = Console.ReadLine();
+            AvaliarMedico.Sugestao = Console.ReadLine();
             Console.WriteLine("Obrigado pela participação! \n\n");
 
         }

@@ -10,7 +10,9 @@ namespace ProjetoBeneficencia.Controller
     public class MenuController
     {
         public const int AVALIAR_MEDICO = 0;
-        public const int ENCERRAR_PROGRAMA = 1;
+        public const int AVALIAR_AMBIENTE = 1;
+        public const int AVALIAR_ALIMENTACAO = 2;
+        public const int ENCERRAR_PROGRAMA = 3;
 
         public static void Criar()
         {
@@ -21,7 +23,9 @@ namespace ProjetoBeneficencia.Controller
             {
                 string mensagem = "Bem vindo ao sistema de avaliação hospitalar" +
                     "\n 0 - Para avaliar um médico: " +
-                    "\n 1 - Para sair do sistema: ";
+                    "\n 1 - Para avaliar o ambiente: " +
+                    "\n 2 - Para avaliar a alimentação:" +
+                    "\n 3 - Para sair do sistema: ";
 
                 Console.WriteLine(mensagem);
 
@@ -29,7 +33,20 @@ namespace ProjetoBeneficencia.Controller
 
                 if (valor == AVALIAR_MEDICO)
                 {
-                    AvaliarController.MedicoAvaliar();
+                    ClienteController.CadastrarClientes();
+                    AvaliarMedicoController.MedicoAvaliar();
+                    break;
+                }
+                else if (valor == AVALIAR_AMBIENTE)
+                {
+                    ClienteController.CadastrarClientes();
+                    AvaliarAmbienteController.AmbienteAvaliar();
+                    break;
+                }
+                else if (valor == AVALIAR_ALIMENTACAO)
+                {
+                    ClienteController.CadastrarClientes();
+                    break;
                 }
                 else if (valor == ENCERRAR_PROGRAMA)
                 {

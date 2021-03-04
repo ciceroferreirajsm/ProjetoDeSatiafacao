@@ -8,7 +8,6 @@ namespace Satisfacao
         static void Main(string[] args)
         {
             MenuController.Criar();
-            Console.WriteLine("nadas");
         }
 
     }

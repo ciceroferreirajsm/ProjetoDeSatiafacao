@@ -5,22 +5,21 @@ using System.Threading.Tasks;
 
 namespace ProjetoBeneficencia.Model
 {
-    class Avaliar
+    public class AvaliarAmbiente
     {
-        public string Medico;
+        public string Local;
         public int Nota;
         public string Sugestao;
 
-        public Avaliar()
+        public AvaliarAmbiente()
         {
-
         }
 
-        public Avaliar(string medico, int nota, string sugestao)
+        public AvaliarAmbiente(string local, int nota, string sugestao)
         {
-            this.Medico = medico;
-            this.Nota = nota;
-            this.Sugestao = sugestao;
+            Local = local;
+            Nota = nota;
+            Sugestao = sugestao;
         }
     }
 }

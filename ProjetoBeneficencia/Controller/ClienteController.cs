@@ -2,19 +2,26 @@
 using ProjetoBeneficencia.Model;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjetoBeneficencia.Controller
 {
-    public class ClienteController 
+    public class ClienteController
     {
-        public static void Gravar()
+        public static void GravarCliente()
         {
             //to do
             //controller
         }
-        public void CadastrarClientes()
+        private static string CaminhoBaseClientes()
+        {
+            return ConfigurationManager.AppSettings["BaseDeClientes"];
+        }
+
+        public static void CadastrarClientes()
         {
             var cliente = new Cliente();
 
@@ -25,7 +32,29 @@ namespace ProjetoBeneficencia.Controller
             cliente.Telefone = Console.ReadLine();
             Console.WriteLine("Seu CPF: ");
             cliente.CPF = Console.ReadLine();
+        }
+        public static List<Cliente> LerClientes()
+        {
+            var clientes = new List<Cliente>();
+            if (File.Exists(CaminhoBaseClientes()))
+            {
+                using StreamReader arquivo = File.OpenText(CaminhoBaseClientes());
+                string linha;
+                int i = 0;
+                while ((linha = arquivo.ReadLine()) != null)
+                {
+                    i++;
+                    if (i == 1)
+                        continue;
+                    var clienteArquivo = linha.Split(';');
 
+                    var cliente = new Cliente(clienteArquivo[0], clienteArquivo[1], clienteArquivo[2]);
+
+                    clientes.Add(cliente);
+                }
+
+            }
+            return clientes;
 
         }
 
