@@ -13,18 +13,30 @@ namespace ProjetoBeneficencia.Controller
     {
         public static void GravarCliente()
         {
-            //to do
-            //controller
+            var clientes = CadastrarClientes();
+            string linha = "";
+            if (File.Exists(CaminhoBaseClientes()))
+            {
+                StreamWriter r = new StreamWriter(CaminhoBaseClientes());
+                r.WriteLine("nome;telefone;cpf");
+                foreach (Cliente c in clientes)
+                {
+                    linha += c.Nome + ";" + c.Telefone + ";" + c.CPF + ";\n";
+                }
+                r.Close();
+            }
+            
         }
         private static string CaminhoBaseClientes()
         {
             return ConfigurationManager.AppSettings["BaseDeClientes"];
         }
 
-        public static void CadastrarClientes()
+        public static List<Cliente> CadastrarClientes()
         {
+            var clientes = new List<Cliente>();
             var cliente = new Cliente();
-
+            
             Console.WriteLine("Primeiramente precisaremos do seu cadastro!");
             Console.WriteLine("Qual seu nome: ");
             cliente.Nome = Console.ReadLine();
@@ -32,32 +44,11 @@ namespace ProjetoBeneficencia.Controller
             cliente.Telefone = Console.ReadLine();
             Console.WriteLine("Seu CPF: ");
             cliente.CPF = Console.ReadLine();
-        }
-        public static List<Cliente> LerClientes()
-        {
-            var clientes = new List<Cliente>();
-            if (File.Exists(CaminhoBaseClientes()))
-            {
-                using StreamReader arquivo = File.OpenText(CaminhoBaseClientes());
-                string linha;
-                int i = 0;
-                while ((linha = arquivo.ReadLine()) != null)
-                {
-                    i++;
-                    if (i == 1)
-                        continue;
-                    var clienteArquivo = linha.Split(';');
 
-                    var cliente = new Cliente(clienteArquivo[0], clienteArquivo[1], clienteArquivo[2]);
+            clientes.Add(cliente);
 
-                    clientes.Add(cliente);
-                }
-
-            }
             return clientes;
-
         }
-
         /*public IActionResult Index()
         {
             return View();
